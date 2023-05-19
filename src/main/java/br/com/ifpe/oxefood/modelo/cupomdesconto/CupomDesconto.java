@@ -32,13 +32,13 @@ public class CupomDesconto extends EntidadeAuditavel  {
     private Double percentualDesconto;
  
     @Column
-    private Double valordesconto;
+    private Double valorDesconto;
  
     @Column
     private Double valorMinimoPedidoPermitido;
  
     @Column
-    private int quanditadeMaximaUso;
+    private int quantidadeMaximaUso;
 
     @Column
     private LocalDate inicioVigencia;
