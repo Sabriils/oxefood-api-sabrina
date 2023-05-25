@@ -22,6 +22,21 @@ public class ClienteService extends GenericService {
        return repository.save(cliente);
    }
 
+   
+   @Transactional
+   public void update(Long id, Cliente clienteAlterado) {
+
+      Cliente cliente = repository.findById(id).get();
+      cliente.setNome(clienteAlterado.getNome());
+      cliente.setDataNascimento(clienteAlterado.getDataNascimento());
+      cliente.setCpf(clienteAlterado.getCpf());
+      cliente.setFoneCelular(clienteAlterado.getFoneCelular());
+      cliente.setFoneFixo(clienteAlterado.getFoneFixo());
+	    
+      super.preencherCamposAuditoria(cliente);
+      repository.save(cliente);
+  }
+
 
    
    public List<Cliente> listarTodos() {
@@ -29,7 +44,7 @@ public class ClienteService extends GenericService {
     return repository.findAll();
 }
 
-public Cliente obterPorID(Long id) {
+   public Cliente obterPorID(Long id) {
 
     return repository.findById(id).get();
 }
