@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ifpe.oxefood.modelo.produto.CategoriaProdutoService;
 import br.com.ifpe.oxefood.modelo.produto.Produto;
 import br.com.ifpe.oxefood.modelo.produto.ProdutoService;
 import br.com.ifpe.oxefood.util.entity.GenericController;
@@ -27,11 +28,18 @@ public class ProdutoController extends GenericController {
    @Autowired
    private ProdutoService ProdutoService;
 
+   @Autowired
+   private CategoriaProdutoService categoriaProdutoService;
+
+
    @PostMapping
    public ResponseEntity<Produto> save(@RequestBody @Valid ProdutoRequest request) {
 
-       Produto produto = ProdutoService.save(request.build());
+       Produto produtoNovo = request.build();
+       produtoNovo.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
+       Produto produto = ProdutoService.save(produtoNovo);
        return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+
    }
    @GetMapping
    public List<Produto> listarTodos() {
@@ -49,7 +57,11 @@ public class ProdutoController extends GenericController {
    @PutMapping("/{id}")
    public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody ProdutoRequest request) {
 
-       ProdutoService.update(id, request.build());
+       Produto produto = request.build();
+       produto.setCategoria(categoriaProdutoService.obterPorID(request.getIdCategoria()));
+       ProdutoService.update(id, produto);
+
+
        return ResponseEntity.ok().build();
    }
 
