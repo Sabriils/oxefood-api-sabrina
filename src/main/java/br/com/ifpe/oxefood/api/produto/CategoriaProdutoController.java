@@ -27,6 +27,7 @@ public class CategoriaProdutoController extends GenericController {
     @Autowired
     private CategoriaProdutoService categoriaProdutoService;
 
+    //alterado
     @PostMapping
     public ResponseEntity<CategoriaProduto> save(@RequestBody @Valid CategoriaProdutoRequest request) {
 
@@ -35,17 +36,40 @@ public class CategoriaProdutoController extends GenericController {
         return new ResponseEntity<CategoriaProduto>(categoriaProduto, HttpStatus.CREATED);
     }
 
+    {/*@PostMapping("/categoriaproduto/novo")
+    public ResponseEntity<CategoriaProduto> saveCategoriaProduto(@RequestBody @Valid CategoriaProdutoRequest request) {
+
+        CategoriaProduto categoriaProdutoNovo = request.build();
+        CategoriaProduto categoriaProduto = categoriaProdutoService.save(categoriaProdutoNovo);
+       return new ResponseEntity<CategoriaProduto>(categoriaProduto, HttpStatus.CREATED);
+    }*/} 
+
+
+    {/*@GetMapping("/categoriaproduto/todos")
+    public List<CategoriaProduto> listarTodosCategoriaProduto() {
+  
+       return categoriaProdutoService.listarTodos();
+    }*/}
+
+    
     @GetMapping
     public List<CategoriaProduto> listarTodos() {
   
        return categoriaProdutoService.listarTodos();
     }
-
+    
     @GetMapping("/{id}")
     public CategoriaProduto obterPorID(@PathVariable Long id) {
 
        return categoriaProdutoService.obterPorID(id);
     }
+
+   {/* @GetMapping("/categoriaproduto/{id}/detalhes")
+    public CategoriaProduto obterCategoriaProdutoPorID(@PathVariable Long id) {
+
+       return categoriaProdutoService.obterPorID(id);
+    }*/}
+
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaProduto> update(@PathVariable("id") Long id, @RequestBody CategoriaProdutoRequest request) {
@@ -54,11 +78,21 @@ public class CategoriaProdutoController extends GenericController {
         return ResponseEntity.ok().build();
     }
 
+    //
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
         categoriaProdutoService.delete(id);
         return ResponseEntity.ok().build();
     }
+
+    //alterado
+   {/* @DeleteMapping("/categoriaproduto/{id}/delete")
+    public ResponseEntity<Void> deleteCategoriaProduto(@PathVariable Long id) {
+
+        categoriaProdutoService.delete(id);
+        return ResponseEntity.ok().build();
+    }*/}
+    
     
 }
