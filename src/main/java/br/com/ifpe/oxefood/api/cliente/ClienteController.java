@@ -20,12 +20,15 @@ import br.com.ifpe.oxefood.modelo.cliente.ClienteService;
 import br.com.ifpe.oxefood.modelo.cliente.EnderecoCliente;
 import br.com.ifpe.oxefood.util.entity.GenericController;
 
+
 @RestController
 @RequestMapping("/api/cliente")
 public class ClienteController extends GenericController {
 
    @Autowired
    private ClienteService clienteService;
+
+
 
    @PostMapping
    public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRequest request) {
@@ -34,17 +37,23 @@ public class ClienteController extends GenericController {
        return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
    }
 
+
    @GetMapping
    public List<Cliente> listarTodos() {
   
        return clienteService.listarTodos();
    }
 
+
+
+   
    @GetMapping("/{id}")
    public Cliente obterPorID(@PathVariable Long id) {
 
        return clienteService.obterPorID(id);
    }
+
+
 
    @PutMapping("/{id}")
    public ResponseEntity<Cliente> update(@PathVariable("id") Long id, @RequestBody ClienteRequest request) {
