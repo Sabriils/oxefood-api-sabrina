@@ -44,8 +44,6 @@ public class ClienteController extends GenericController {
        return clienteService.listarTodos();
    }
 
-
-
    
    @GetMapping("/{id}")
    public Cliente obterPorID(@PathVariable Long id) {
