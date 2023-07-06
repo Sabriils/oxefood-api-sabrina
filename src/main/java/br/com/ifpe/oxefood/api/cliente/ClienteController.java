@@ -19,6 +19,9 @@ import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import br.com.ifpe.oxefood.modelo.cliente.ClienteService;
 import br.com.ifpe.oxefood.modelo.cliente.EnderecoCliente;
 import br.com.ifpe.oxefood.util.entity.GenericController;
+//import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiResponse;
+//import io.swagger.annotations.ApiResponses;
 
 
 @RestController
@@ -29,22 +32,30 @@ public class ClienteController extends GenericController {
    private ClienteService clienteService;
 
 
-
+   //@ApiOperation(value = "Serviço responsável por salvar um cliente no sistema.")
    @PostMapping
    public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRequest request) {
 
-       Cliente cliente = clienteService.save(request.build());
+      Cliente clienteNovo = request.build();
+      Cliente cliente = clienteService.save(clienteNovo);
        return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
    }
 
-
+   //@ApiOperation(value = "Serviço responsável por listar todos os clientes do sistema.")
    @GetMapping
    public List<Cliente> listarTodos() {
   
        return clienteService.listarTodos();
    }
 
-   
+   /*@ApiOperation(value = "Serviço responsável por obter um cliente referente ao Id passado na URL.")
+   @ApiResponses(value = {
+       @ApiResponse(code = 200, message = "Retorna o cliente."),
+       @ApiResponse(code = 401, message = "Acesso não autorizado."),
+       @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
+       @ApiResponse(code = 404, message = "Não foi encontrado um registro para o Id informado."),
+       @ApiResponse(code = 500, message = "Foi gerado um erro no servidor."),
+   })*/
    @GetMapping("/{id}")
    public Cliente obterPorID(@PathVariable Long id) {
 

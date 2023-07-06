@@ -2,6 +2,7 @@ package br.com.ifpe.oxefood.modelo.cliente;
 
 import java.util.ArrayList;
 import java.util.List;
+//import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpe.oxefood.util.entity.GenericService;
+import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
 
 @Service
 public class ClienteService extends GenericService {
@@ -18,9 +20,14 @@ public class ClienteService extends GenericService {
 
    @Autowired
     private EnderecoClienteRepository enderecoClienteRepository;
+    
+
+   private UsuarioService usuarioService;
 
    @Transactional
    public Cliente save(Cliente cliente) {
+
+       usuarioService.save(cliente.getUsuario());
 
        super.preencherCamposAuditoria(cliente);
        return repository.save(cliente);
@@ -60,6 +67,8 @@ public class ClienteService extends GenericService {
 
    public Cliente obterPorID(Long id) {
     return repository.findById(id).get();
+    
+    
 }
 
 //implementação dos métodos para incluir, alterar e remover o endereço do cliente
@@ -89,7 +98,6 @@ public class ClienteService extends GenericService {
        return endereco;
 
 }
-
 
   @Transactional
     public EnderecoCliente atualizarEnderecoCliente(Long id, EnderecoCliente enderecoAlterado) {
