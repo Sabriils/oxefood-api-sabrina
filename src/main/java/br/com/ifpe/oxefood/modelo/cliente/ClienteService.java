@@ -21,7 +21,7 @@ public class ClienteService extends GenericService {
    @Autowired
     private EnderecoClienteRepository enderecoClienteRepository;
     
-
+   @Autowired
    private UsuarioService usuarioService;
 
    @Transactional

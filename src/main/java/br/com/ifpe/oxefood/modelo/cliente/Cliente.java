@@ -33,28 +33,30 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente extends EntidadeAuditavel  {
+    
+    private static final long serialVersionUID = -9147515922627050356L;
 
-   @ManyToOne
-   @JoinColumn(nullable = false)
-   private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuario;
 
-   @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
-   @Fetch(FetchMode.SUBSELECT)
-   private List<EnderecoCliente> enderecos;
+    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<EnderecoCliente> enderecos;
 
-   @Column(nullable = false, length = 100)
-   private String nome;
+    @Column(nullable = false, length = 100)
+    private String nome;
 
-   @Column
-   private LocalDate dataNascimento;
+    @Column
+    private LocalDate dataNascimento;
 
-   @Column(unique = true)
-   private String cpf;
+    @Column(unique = true)
+    private String cpf;
 
-   @Column
-   private String foneCelular;
+    @Column
+    private String foneCelular;
 
-   @Column
-   private String foneFixo;
+    @Column
+    private String foneFixo;
 
 }

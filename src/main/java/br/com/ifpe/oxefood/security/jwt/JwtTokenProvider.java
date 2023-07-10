@@ -1,4 +1,6 @@
 package br.com.ifpe.oxefood.security.jwt;
+
+
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
@@ -73,7 +75,8 @@ public class JwtTokenProvider {
 
     public List<SimpleGrantedAuthority> getAuthorities(String token) {
 
-        List<String> roles = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("roles", List.class);
+        List<String> roles = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("roles",
+                List.class);
 
         return roles.stream().map((role) -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
     }
