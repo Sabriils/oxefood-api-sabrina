@@ -71,7 +71,8 @@ public class ClienteController extends GenericController {
        return ResponseEntity.ok().build();
    }
 
-   
+   //A linha clienteService.delete(id) é responsável por invocar o serviço clienteService e passar o ID do cliente que será excluído como parâmetro. 
+   //Ao chamar clienteService.delete(id), o método está solicitando ao serviço clienteService que execute a exclusão do cliente correspondente ao ID fornecido. 
    @DeleteMapping("/{id}")
    public ResponseEntity<Void> delete(@PathVariable Long id) {
 

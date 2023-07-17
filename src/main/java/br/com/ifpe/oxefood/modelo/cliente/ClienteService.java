@@ -48,15 +48,19 @@ public class ClienteService extends GenericService {
       repository.save(cliente);
   }
 
+  
+
+  //Em resumo, o método realiza a exclusão lógica de um cliente, desativando-o, preenchendo campos de auditoria, e salvando as alterações no banco de dados dentro de uma transação.
   @Transactional
   public void delete(Long id) {
 
-      Cliente cliente = repository.findById(id).get();
-      cliente.setHabilitado(Boolean.FALSE);
-      super.preencherCamposAuditoria(cliente);
+      Cliente cliente = repository.findById(id).get(); //Realiza uma consulta no banco de dados para obter o cliente correspondente ao ID fornecido.
+      cliente.setHabilitado(Boolean.FALSE);//Desativa o cliente definindo o atributo habilitado como false.
+      super.preencherCamposAuditoria(cliente);//Chama um método na classe pai para preencher campos de auditoria no objeto cliente.
 
-      repository.save(cliente);
+      repository.save(cliente);//Salva as alterações realizadas no objeto cliente no banco de dados, persistindo a desativação do cliente.
   }
+
 
 
 //O método listarTodos retorna uma lista de todos os clientes cadastrados no sistema. 
